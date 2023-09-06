@@ -1,3 +1,4 @@
+import { clear } from "console";
 import { ethers } from "hardhat";
 
 async function main() {
@@ -15,16 +16,14 @@ async function main() {
   console.log(
     `MultiSig deployed to ${multiSig.target}`
   )
-
-  
-
   const receipt = await multiSig.craeteTransaction(amount, spender.address)
   // @ts-ignore
   console.log(await (await receipt.wait())?.logs[0]?.args)
 
   await multiSig.connect(admimn2).ApproveTransaction(1)
   let balanceBefore = await ethers.provider.getBalance(spender.address)
-  console.log(`balance before ${balanceBefore}`)
+  console.log(`balance before ${ethers.formatEther(balanceBefore)}`)
+
   await multiSig.connect(admin3).ApproveTransaction(1)
 
   console.log(`spender balance ${ethers.formatEther((await ethers.provider.getBalance(spender.address))- balanceBefore)} `)

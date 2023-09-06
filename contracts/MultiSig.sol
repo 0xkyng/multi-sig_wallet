@@ -61,10 +61,11 @@ contract MultiSig {
         newTransaction.amount = amount;
         newTransaction.spender = _spender;
         newTransaction.isActive = true;
+        ApproveTransaction(transactionId);
         emit Create(msg.sender, _spender, amount);
     }
 
-    function ApproveTransaction(uint id) external onlyAdmin{
+    function ApproveTransaction(uint id) public onlyAdmin{
         require(!hasApproved[id][msg.sender], "Already approved");
         Transaction storage newTransaction = transaction[id];
         require(newTransaction.isActive, "Not active");
