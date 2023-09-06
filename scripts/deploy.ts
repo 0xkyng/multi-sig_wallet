@@ -27,7 +27,7 @@ async function main() {
   console.log(`balance before ${balanceBefore}`)
   await multiSig.connect(admin3).ApproveTransaction(1)
 
-  console.log(`spender balance ${ethers.provider.getBalance(spender.address)} `)
+  console.log(`spender balance ${ethers.formatEther((await ethers.provider.getBalance(spender.address))- balanceBefore)} `)
 
   
 }

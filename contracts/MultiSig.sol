@@ -4,8 +4,8 @@ pragma solidity 0.8.19;
 // a multisig wallet
 // contract should accept ether
 // array of signatories
-// mapping address to bool for admins
-// mapping uint to address to bool to track approval of eacch admin on each transaction
+// mapping address => bool for admins
+// mapping uint => address => bool to track approval of eacch admin on each transaction
 // transaction details
 
 contract MultiSig {
