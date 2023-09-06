@@ -9,6 +9,7 @@ pragma solidity 0.8.19;
 // transaction details
 
 contract MultiSig {
+
     address[] Admins;
     uint constant MINIMUM = 3;
     uint transactionId;
@@ -73,11 +74,11 @@ contract MultiSig {
         uint count = newTransaction.numberOfApproval;
         uint minAdmin = calcMinimumApproval();
         if (count >= minAdmin) {
-            processTransaction(id);
+            executeTransaction(id);
         }
     }
 
-    function processTransaction(uint id) internal {
+    function executeTransaction(uint id) internal {
         Transaction storage newTransaction = transaction[id];
         payable (newTransaction.spender).transfer(newTransaction.amount);
         newTransaction.isActive = false;
