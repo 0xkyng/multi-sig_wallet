@@ -56,7 +56,7 @@ contract MultiSig {
         Admins = _admins;
     }
 
-    function craeteTransaction(uint amount, address _spender) external onlyAdmin {
+    function createTransaction(uint amount, address _spender) external onlyAdmin {
         transactionId++;
         Transaction storage newTransaction = transaction[transactionId];
         newTransaction.amount = amount;
@@ -83,6 +83,10 @@ contract MultiSig {
         payable (newTransaction.spender).transfer(newTransaction.amount);
         newTransaction.isActive = false;
     }
+
+    // function revoke(uint id) internal onlyAdmin{
+    //     require(ApproveTransaction(transactionId), "Not approved");
+    // }
 
     function calcMinimumApproval() public view returns(uint minAdmin) {
         uint size = Admins.length;

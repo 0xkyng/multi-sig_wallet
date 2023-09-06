@@ -16,7 +16,7 @@ async function main() {
   console.log(
     `MultiSig deployed to ${multiSig.target}`
   )
-  const receipt = await multiSig.craeteTransaction(amount, spender.address)
+  const receipt = await multiSig.createTransaction(amount, spender.address)
   // @ts-ignore
   console.log(await (await receipt.wait())?.logs[0]?.args)
 
