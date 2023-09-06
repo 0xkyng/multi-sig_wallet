@@ -14,4 +14,9 @@ contract FactoryContract {
     function getMultisigWallet() external view returns(MultiSig[] memory) {
         return wallets;
     }
+
+    function getWalletByIndex(uint index) external view returns(MultiSig) {
+        require(wallets.length > index, "Invalid index");
+        return wallets[index];
+    }
 }
