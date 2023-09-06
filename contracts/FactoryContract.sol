@@ -10,4 +10,8 @@ contract FactoryContract {
         newWallet = new MultiSig(_admins);
         wallets.push(newWallet);
     }
+
+    function getMultisigWallet() external view returns(MultiSig[] memory) {
+        return wallets;
+    }
 }
