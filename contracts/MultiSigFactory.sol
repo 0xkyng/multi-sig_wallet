@@ -5,7 +5,7 @@ import "./MultiSig.sol";
 contract MultiSigFactory {
     MultiSig[] public wallets;
 
-    function createMultisigWallet(address[] memory _admins) external returns (MultiSig newWallet) {
+    function createMultisigWallet(address[] memory _admins) external payable returns (MultiSig newWallet) {
         newWallet = new MultiSig(_admins);
         wallets.push(newWallet);
     }

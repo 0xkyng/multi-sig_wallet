@@ -2,28 +2,27 @@ import { ethers } from "hardhat";
 
 async function main() {
   const [admin1, admimn2, admin3, admin4, admin5, spender, sender] = await ethers.getSigners()
-  
-  
-  const multiSigfactory = await ethers.deployContract("MultiSigFactory");
-
-  multiSigfactory.waitForDeployment();
   const Owners = [admin1.address, admimn2.address, admin3.address]
 
-  const tnx = await multiSigfactory.createMultisigWallet(Owners)
-  const receipt = await tnx.wait()
+  let amount = ethers.parseEther("2")
 
-  const firstMultisig = await multiSigfactory.wallets(0)
-  const multisig1 = await ethers.getContractAt("MultiSig", firstMultisig)
+  
+  const multiSigfactory = await ethers.deployContract("MultiSigFactory", []);
 
-  await sender.sendTransaction({
-    value: ethers.parseEther("50"),
-    to: multisig1.target,
-  })
+  await multiSigfactory.waitForDeployment();
 
-  await multisig1.connect(admin3).createTransaction(ethers.parseEther("1"), spender.address)
+  let receipt = await multiSigfactory.createMultisigWallet(Owners, {value: ethers.parseEther("50")})
+  
+  
+  //@ts-ignore
+  let newMultisig = (await receipt.wait())?.logs[0]?.args[0]
+  let  multisigContract = await ethers.getContractAt("IMultiSig", newMultisig)
 
-  console.log(await ethers.provider.getBalance(multisig1.target))
+  await multisigContract.createTransaction(amount, sender.address)
+  await multisigContract.getTransaction(1)
+
 }
+
 
 main().catch((error) => {
   console.error(error);
