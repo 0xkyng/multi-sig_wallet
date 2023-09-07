@@ -1,4 +1,3 @@
-import { clear } from "console";
 import { ethers } from "hardhat";
 
 async function main() {
