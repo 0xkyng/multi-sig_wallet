@@ -4,10 +4,12 @@ import "./MultiSig.sol";
 
 contract MultiSigFactory {
     MultiSig[] public wallets;
+    event Create(MultiSig _addr);
 
     function createMultisigWallet(address[] memory _admins) external payable returns (MultiSig newWallet) {
         newWallet = new MultiSig(_admins);
         wallets.push(newWallet);
+        emit Create(newWallet );
     }
 
     function getMultisigWallet() external view returns(MultiSig[] memory) {

@@ -16,10 +16,10 @@ async function main() {
   
   //@ts-ignore
   let newMultisig = (await receipt.wait())?.logs[0]?.args[0]
-  let  multisigContract = await ethers.getContractAt("IMultiSig", newMultisig)
+  let  multisigContract = await ethers.getContractAt("IMultisig", newMultisig)
 
   await multisigContract.createTransaction(amount, sender.address)
-  await multisigContract.getTransaction(1)
+  console.log(await multisigContract.getTransaction(1))
 
 }
 
