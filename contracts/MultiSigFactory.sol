@@ -7,7 +7,7 @@ contract MultiSigFactory {
     event Create(MultiSig _addr);
 
     function createMultisigWallet(address[] memory _admins) external payable returns (MultiSig newWallet) {
-        newWallet = new MultiSig(_admins);
+        newWallet = new MultiSig{value: msg.value}(_admins);
         wallets.push(newWallet);
         emit Create(newWallet );
     }
