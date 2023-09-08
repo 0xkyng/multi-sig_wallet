@@ -28,7 +28,7 @@ async function main() {
   // call the creatTransaction() in the multisig contract
   await multisig.createTransaction(amount, spender.address)
 
-  // // call the approve function to approve the transaction
+  //call the approve function to approve the transaction
   await multisig.ApproveTransaction(1);
 
 

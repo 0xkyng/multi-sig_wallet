@@ -26,7 +26,9 @@ async function main() {
 
   await multiSig.connect(admin3).ApproveTransaction(1)
 
-  console.log(`spender balance ${ethers.formatEther((await ethers.provider.getBalance(spender.address))- balanceBefore)} `)
+  console.log(
+    `spender balance ${ethers.formatEther((await ethers.provider.getBalance(spender.address))- balanceBefore)}`
+    )
 
   await sender.sendTransaction({
     value: ethers.parseEther("5"),
