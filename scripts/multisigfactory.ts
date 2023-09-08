@@ -17,7 +17,22 @@ async function main() {
   // to create a multisig wallet
   let tnx = await multisigfactory.createMultisigWallet(Owners, {value: ethers.parseEther("0.00003")})
 
-  
+  // get into the log database to get the newly created multisig address
+    //@ts-ignore
+    const newMultisg = (await tnx.wait())?.logs[0]?.args[0];
+
+  // connect to the newly created multisig with the getContractAt()
+  // using the interface and the contract address
+  let multisig = await ethers.getContractAt("IMultisig", newMultisg)
+
+  // call the creatTransaction() in the multisig contract
+  await multisig.createTransaction(amount, spender.address)
+
+  // // call the approve function to approve the transaction
+  await multisig.ApproveTransaction(1);
+
+
+
 
 
 
