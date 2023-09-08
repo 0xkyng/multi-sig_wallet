@@ -13,6 +13,11 @@ const config: HardhatUserConfig = {
       accounts: [PRIVATEKEY1!, PRIVATEKEY2!, PRIVATEKEY3!, ],
     },
   },
+  etherscan: {
+    // Your API key for Etherscan
+    // Obtain one at https://etherscan.io/
+    apiKey: "YOUR_ETHERSCAN_API_KEY"
+  }
 };
 
 export default config;
