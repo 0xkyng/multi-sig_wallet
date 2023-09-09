@@ -10,7 +10,7 @@ async function main() {
     
     const admins = [admin1.address, admin2.address, admin3.address, admin4.address]
     // get the address of the contract
-    const contractAddress = "0x5832A489EA41Ea03882b1bCD00bdC35958F4e5C8";
+    const contractAddress = "0x3c68027368aC1938926f1716AfFAC8A95dDa6267";
     // connect to the deployed contract with getContractAt()
     // using the interface and address of the contract
     const multisigFactory = await ethers.getContractAt("IMultisigFactory", contractAddress);
@@ -19,6 +19,7 @@ async function main() {
     // get into the log database to get the newly created multisig address
     //@ts-ignore
     let newMultisig = (await create.wait())?.logs[0]?.args[0];
+    
 
     // connect to the newly created multisig with the getContractAt()
     // using the interface and the contract address
